@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
     username: "user01"
   }, {
     id: 2,
-    username: "user02"
+    username: "FUCK U NATE"
   }]);
 });
 
