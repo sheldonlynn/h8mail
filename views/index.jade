@@ -2,10 +2,16 @@ extends layout
 
 block content
   h1= H8MAIL
-  form
-    |Hello
+  form(
+    action="/email"
+    method="post"
+  )
+    |Submit an Email
     input(
       type="text"
       name="email"
       id="email"
+    )
+    input(
+      type="submit"
     )
