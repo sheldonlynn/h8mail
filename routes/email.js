@@ -37,6 +37,8 @@ async function getRandom(num) {
 }
 
 async function tims(page, email, firstName, lastName, postalCode, day, month, year) {
+  await page.goto('http://www.timhortons.com/ca/en/newsletter-signup.php');
+
   await page.evaluate((firstName, lastName, postalCode, email, day, month, year) => {
       document.querySelector('#email').value = email;
       document.querySelector('#firstname').value = firstName;
@@ -51,9 +53,60 @@ async function tims(page, email, firstName, lastName, postalCode, day, month, ye
 
   await page.evaluate(() => {
     window.scrollBy(0, window.innerHeight / 2);
-  });
+  }, email);
 
   await page.click('.span12 > button.button-contact.submit');
+}
+
+async function oriental(page, email) {
+  await page.goto('http://www.orientaltrading.com');
+
+  await page.mouse.click(0, 0);
+
+  await page.evaluate((email) => {
+    document.querySelector('#sign-up-email').value = email;
+  }, email);
+
+  // await page.evaluate(() => {
+  //   window.scrollBy(0, window.innerHeight / 2);
+  // });
+
+  await page.click('.email-signup .inline-button');
+
+  await page.click('li.checkbox-input:nth-of-type(1)');
+  await page.click('li.checkbox-input:nth-of-type(2)');
+  await page.click('li.checkbox-input:nth-of-type(3)');
+
+  await page.click('#emailForm .btn_primary');
+}
+
+async function potterybarn(page, email) {
+  await page.goto('https://www.potterybarnkids.com');
+
+  await page.mouse.click(0, 0);
+
+  await page.evaluate((email) => {
+    document.querySelector('#footer-email-signup').value = email;
+  }, email);
+
+  await page.click('#join-our-email-list .submit-button');
+
+  await page.click('#select-brand li.group-child:nth-of-type(1)');
+  await page.click('#select-brand li.group-child:nth-of-type(2)');
+  await page.click('#select-brand li.group-child:nth-of-type(3)');
+  await page.click('#select-brand li.group-child:nth-of-type(4)');
+
+  await page.click('.actions > #submitNow');
+}
+
+async function flowers(page, email) {
+  await page.goto('https://www.1800flowers.com');
+
+  await page.evaluate((email) => {
+    document.querySelector('#footerEmailOptIn').value = email;
+  }, email);
+
+  await page.click('#footerEmailSubmitBtn');
 }
 
 /* GET users listing. */
@@ -62,11 +115,10 @@ router.post('/', function(req, res) {
   (async() => {
 
     const browser = await puppeteer.launch({
-      /* headless: false,
-      slowMo : 250 */
+      headless: false,
+      slowMo : 250
     });
     const page = await browser.newPage();
-    await page.goto('http://www.timhortons.com/ca/en/newsletter-signup.php');
     // await page.focus('#firstname');
 
     let firstName = faker.name.firstName();
@@ -78,6 +130,9 @@ router.post('/', function(req, res) {
     let month = months[await getRandom(months.length)];
 
     await tims(page, email, firstName, lastName, postalCode, day, month, year);
+    await oriental(page, email);
+    await potterybarn(page, email);
+    await flowers(page, email);
 
     res.send('subscribed');
   })();
