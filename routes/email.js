@@ -109,6 +109,21 @@ async function flowers(page, email) {
   await page.click('#footerEmailSubmitBtn');
 }
 
+async function martha(page, email, firstName) {
+  await page.goto('https://secure.marthastewart.com/common/profile/quicksignup.jsp');
+
+  await page.evaluate((email, firstName) => {
+    document.querySelector('#firstName').value = firstName;
+    document.querySelector('#regEmail').value = email;
+  }, email, firstName);
+
+  await page.click('.newsletterContainer:nth-of-type(2)');
+  await page.click('.newsletterContainer:nth-of-type(3)');
+  await page.click('.newsletterContainer:nth-of-type(4)');
+
+  await page.click('#formSubmit');
+}
+
 /* GET users listing. */
 router.post('/', function(req, res) {
 
@@ -119,7 +134,6 @@ router.post('/', function(req, res) {
       slowMo : 250
     });
     const page = await browser.newPage();
-    // await page.focus('#firstname');
 
     let firstName = faker.name.firstName();
     let lastName = faker.name.lastName();
@@ -129,10 +143,11 @@ router.post('/', function(req, res) {
     let day = (await getRandom(28) + 1);
     let month = months[await getRandom(months.length)];
 
-    await tims(page, email, firstName, lastName, postalCode, day, month, year);
-    await oriental(page, email);
-    await potterybarn(page, email);
-    await flowers(page, email);
+    // await tims(page, email, firstName, lastName, postalCode, day, month, year);
+    // await oriental(page, email);
+    // await potterybarn(page, email);
+    // await flowers(page, email);
+    await martha(page, email, firstName);
 
     res.send('subscribed');
   })();
