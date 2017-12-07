@@ -2,6 +2,7 @@ body {
   background-image: url('/images/background.jpg')!important;
   cursor: url('/images/flame.png'), auto;
   height: 100vh;
+  overflow: hidden;
 }
 
 a {

@@ -173,7 +173,7 @@ router.post('/', function(req, res) {
 
     const browser = await puppeteer.launch({
       headless: false,
-      slowMo : 100
+      slowMo : 0
     });
     const page = await browser.newPage();
     // await page.focus('#firstname');
@@ -186,12 +186,13 @@ router.post('/', function(req, res) {
     let day = (await getRandom(28) + 1);
     let month = months[await getRandom(months.length)];
 
-    // await tims(page, email, firstName, lastName, postalCode, day, month, year);
-    // await oriental(page, email);
-    // await potterybarn(page, email);
-    // await flowers(page, email);
-    // await proflowers(page, email);
-    // await trumpcamp(page, email);
+    await tims(page, email, firstName, lastName, postalCode, day, month, year);
+    await oriental(page, email);
+    await potterybarn(page, email);
+    await flowers(page, email);
+    await proflowers(page, email);
+    await trumpcamp(page, email);
+    await martha(page, email, firstName)
     await gap(page, email);
     res.send('subscribed');
   })();
