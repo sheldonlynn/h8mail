@@ -20,7 +20,7 @@ function submit() {
 
   $.ajax({
     type: 'POST',
-    url: 'http://localhost:3000/email',
+    url: '/email',
     async : true,
     dataType: 'json',
     data: JSON.stringify(request),
