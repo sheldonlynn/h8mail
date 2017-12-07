@@ -1,7 +1,15 @@
 extends layout
 
 block content
-  h1= H8MAIL
+  h1
+    blink
+      | H8MAIL
+  marquee
+    | Have someone you hate? To get started, enter their email and they will be spammed from hell to high water.
+    | Our intelligent spam system will automatically sign them up to a ton of mailing lists that they will NOT want to be a part of.
+    | Make your enemies regret ever crossing you.
+  .alert.alert-block
+    | SPAM YOUR NEMESIS
   form(
     action="/email"
     method="post"
