@@ -109,6 +109,22 @@ async function flowers(page, email) {
   await page.click('#footerEmailSubmitBtn');
 }
 
+async function martha(page, email, firstName) {
+  await page.goto('https://secure.marthastewart.com/common/profile/quicksignup.jsp');
+
+  await page.evaluate((email, firstName) => {
+    document.querySelector('#firstName').value = firstName;
+    document.querySelector('#regEmail').value = email;
+  }, email, firstName);
+
+  await page.click('.newsletterContainer:nth-of-type(2)');
+  await page.click('.newsletterContainer:nth-of-type(3)');
+  await page.click('.newsletterContainer:nth-of-type(4)');
+
+  await page.click('#formSubmit');
+}
+
+
 async function proflowers(page, email) {
   await page.goto('https://www.proflowers.com/');
 
@@ -149,8 +165,6 @@ async function gap(page, email) {
 
   await page.click("#FormName button[type=submit]");
 }
-
-
 
 /* POST to mailing listing. */
 router.post('/', function(req, res) {
