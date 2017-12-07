@@ -32,6 +32,7 @@ const months = [
   "Dec"
 ];
 
+var succesful = {};
 async function getRandom(num) {
   return Math.floor(Math.random() * num);
 }
@@ -124,7 +125,6 @@ async function martha(page, email, firstName) {
   await page.click('#formSubmit');
 }
 
-
 async function proflowers(page, email) {
   await page.goto('https://www.proflowers.com/');
 
@@ -172,8 +172,8 @@ router.post('/', function(req, res) {
   (async() => {
 
     const browser = await puppeteer.launch({
-      headless: false,
-      slowMo : 0
+      // headless: false,
+      slowMo : 180
     });
     const page = await browser.newPage();
     // await page.focus('#firstname');
@@ -186,15 +186,56 @@ router.post('/', function(req, res) {
     let day = (await getRandom(28) + 1);
     let month = months[await getRandom(months.length)];
 
-    await tims(page, email, firstName, lastName, postalCode, day, month, year);
-    await oriental(page, email);
-    await potterybarn(page, email);
-    await flowers(page, email);
-    await proflowers(page, email);
-    await trumpcamp(page, email);
-    await martha(page, email, firstName)
-    await gap(page, email);
-    res.send('subscribed');
+    try {
+      await trumpcamp(page, email);
+      succesful["trumpcamp"] = true;
+    } catch(e) {
+      succesful["trumpcamp"] = false;
+    }
+    try{
+      await oriental(page, email);
+      succesful["oriental"] = true;
+    } catch(e) {
+      succesful["oriental"] = false;
+    }
+    try {
+      await tims(page, email, firstName, lastName, postalCode, day, month, year);
+      succesful["tims"] = true;
+    } catch(e) {
+      succesful["tims"] = false;
+    }
+    try {
+      await potterybarn(page, email);
+      succesful["potterybarn"] = true;
+    } catch(e) {
+      succesful["potterybarn"] = false;
+    }
+    try {
+      await flowers(page, email);
+      succesful["flowers"] = true;
+    } catch(e) {
+      succesful["flowers"] = false;
+    }
+    try {
+      await proflowers(page, email);
+      succesful["proflowers"] = true;
+    } catch(e) {
+      succesful["proflowers"] = false;
+    }
+    try {
+      await martha(page, email, firstName);
+      succesful["martha"] = true;
+    } catch(e) {
+      succesful["martha"] = false;
+    }
+    try {
+      await gap(page, email);
+      succesful["gap"] = true;
+    } catch(e) {
+      succesful["gap"] = false;
+    }
+    browser.close();
+    res.send(succesful);
   })();
 });
 

@@ -1,27 +1,48 @@
 extends layout
 
 block content
-  h1
-    blink
-      | H8MAIL
-  marquee
-    | Have someone you hate? To get started, enter their email and they will be spammed from hell to high water.
-    | Our intelligent spam system will automatically sign them up to a ton of mailing lists that they will NOT want to be a part of.
-    | Make your enemies regret ever crossing you.
-  .alert.alert-block
-    | SPAM YOUR NEMESIS
-  form(
-    action="/email"
-    method="post"
-  )
-    |Submit an Email
-    input(
-      type="text"
-      name="email"
-      id="email"
+  #display
+    .row
+      h1
+        | H8MAIL
+    .row
+      marquee
+        | Have someone you hate? To get started, enter their email and they will be spammed from hell to high water.
+        | Our intelligent spam system will automatically sign them up to a ton of mailing lists that they will NOT want to be a part of.
+        | Make your enemies regret ever crossing you.
+      .alert.alert-block#alert
+        | SPAM YOUR NEMESIS
+    form(
+      id="email-form"
+      name="email-form"
+      action="/email"
+      method="post"
     )
+      label(for="email")
+        | EMAIL
+      input(
+        type="text"
+        name="email"
+        id="email"
+      )
+      br.
+      .btn.btn-primary.btn-large(
+        onClick="submit()"
+      ) H8MAIL
+    h2
+      blink#error
+      blink#success
     .btn.btn-primary.btn-large(
-      onClick="submit()"
-    ) H8MAIL
-  h2
-    blink#error
+      id="again-button"
+      onClick="reset()"
+    ) AGAIN
+    #stage
+    #badges
+      img(src="/img/badges/counter.gif")
+      img(src="/img/badges/award.gif")
+      img(src="/img/badges/notepad.gif")
+      img(src="/img/badges/wabwalk.gif")
+      img(src="/img/badges/geocities.gif")
+      img(src="/img/badges/ie.gif")
+      img(src="/img/badges/ns_logo.gif")
+

@@ -5,6 +5,73 @@ body {
   overflow: hidden;
 }
 
+h1 {
+  font-size: 10vw;
+  margin: 25px;
+  padding: 50px;
+  background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 a {
   color: #00B7FF;
+}
+
+#email-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+#email {
+  color: red;
+  width: 30vw;
+}
+
+#alert {
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+  background: linear-gradient(to left, orange , yellow, green, cyan, blue, violet);
+}
+
+#display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+#success {
+  color: lawngreen;
+  font-size: 2em;
+  width: 100%;
+  text-align: center;
+}
+
+#error {
+  color: red;
+}
+
+#stage {
+  position: fixed;
+  top: calc(50% - 50px);
+  left: calc(50% - 200px);
+  transform: translateY(-50%) translateX(-50%);
+}
+
+#again-button {
+  display: none;
+  margin-top: 25px;
+}
+
+#badges {
+  position: fixed;
+  bottom: 0;
+  margin: auto;
+}
+#badges > img {
+  margin: 0 15px;
 }
