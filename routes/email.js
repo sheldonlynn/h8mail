@@ -173,7 +173,7 @@ router.post('/', function(req, res) {
 
     const browser = await puppeteer.launch({
       // headless: false,
-      slowMo : 180
+      // slowMo : 180
     });
     const page = await browser.newPage();
     // await page.focus('#firstname');
