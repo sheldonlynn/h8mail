@@ -109,14 +109,57 @@ async function flowers(page, email) {
   await page.click('#footerEmailSubmitBtn');
 }
 
-/* GET users listing. */
+async function proflowers(page, email) {
+  await page.goto('https://www.proflowers.com/');
+
+  await page.evaluate((email) => {
+    document.querySelector('#UCEmailSignUp_r > input[type=text]').value = email;
+  }, email);
+
+  await page.click('#UCEmailSignUp_r > .button');
+}
+
+async function trumpcamp(page, email) {
+  await page.goto('https://www.conservativebookclub.com/signups/donald-trump-newsletter-signup');
+
+  await page.evaluate((email) => {
+    document.querySelector('input[type=email]').value = email;
+  }, email);
+
+  await page.click(".submitpostupform");
+}
+
+async function gap(page, email) {
+  await page.goto("https://secure-www.gapcanada.ca/profile/info.do?cid=53959");
+
+  await page.evaluate((email) => {
+    document.querySelector('#inputEmail').value = email;
+    document.querySelector('#inputConfirmEmail').value = email;
+  }, email);
+
+  await page.click("#gap_ca_women");
+  await page.click("#gap_ca_men");
+  await page.click("#gap_ca_kids");
+  await page.click("#gap_ca_baby");
+
+  await page.click("#br_ca_pref_check");
+  await page.click("#on_ca_pref_check");
+  await page.click("#gfs_ca_pref_check");
+  await page.click("#brfs_ca_pref_check");
+
+  await page.click("#FormName button[type=submit]");
+}
+
+
+
+/* POST to mailing listing. */
 router.post('/', function(req, res) {
 
   (async() => {
 
     const browser = await puppeteer.launch({
       headless: false,
-      slowMo : 250
+      slowMo : 100
     });
     const page = await browser.newPage();
     // await page.focus('#firstname');
@@ -129,11 +172,13 @@ router.post('/', function(req, res) {
     let day = (await getRandom(28) + 1);
     let month = months[await getRandom(months.length)];
 
-    await tims(page, email, firstName, lastName, postalCode, day, month, year);
-    await oriental(page, email);
-    await potterybarn(page, email);
-    await flowers(page, email);
-
+    // await tims(page, email, firstName, lastName, postalCode, day, month, year);
+    // await oriental(page, email);
+    // await potterybarn(page, email);
+    // await flowers(page, email);
+    // await proflowers(page, email);
+    // await trumpcamp(page, email);
+    await gap(page, email);
     res.send('subscribed');
   })();
 });
