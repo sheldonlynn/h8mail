@@ -171,10 +171,7 @@ router.post('/', function(req, res) {
 
   (async() => {
 
-    const browser = await puppeteer.launch({
-      // headless: false,
-      // slowMo : 250
-    });
+    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
     const page = await browser.newPage();
     // await page.focus('#firstname');
 
