@@ -173,7 +173,7 @@ router.post('/', function(req, res) {
 
     const browser = await puppeteer.launch({
       // headless: false,
-      slowMo : 250
+      // slowMo : 250
     });
     const page = await browser.newPage();
     // await page.focus('#firstname');
@@ -216,12 +216,12 @@ router.post('/', function(req, res) {
     } catch(e) {
       succesful["flowers"] = false;
     }
-    try {
-      await proflowers(page, email);
-      succesful["proflowers"] = true;
-    } catch(e) {
-      succesful["proflowers"] = false;
-    }
+    // try {
+    //   await proflowers(page, email);
+    //   succesful["proflowers"] = true;
+    // } catch(e) {
+    //   succesful["proflowers"] = false;
+    // }
     try {
       await martha(page, email, firstName);
       succesful["martha"] = true;
