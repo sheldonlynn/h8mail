@@ -24,6 +24,7 @@ function submit() {
     async : true,
     dataType: 'json',
     data: JSON.stringify(request),
+    timeout: 60000,
     headers: {
       "Content-Type": "application/json"
     },
