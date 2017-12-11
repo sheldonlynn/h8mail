@@ -173,7 +173,7 @@ router.post('/', function(req, res) {
 
     const browser = await puppeteer.launch({
       // headless: false,
-      // slowMo : 180
+      slowMo : 250
     });
     const page = await browser.newPage();
     // await page.focus('#firstname');
@@ -192,24 +192,24 @@ router.post('/', function(req, res) {
     } catch(e) {
       succesful["trumpcamp"] = false;
     }
-    try{
-      await oriental(page, email);
-      succesful["oriental"] = true;
-    } catch(e) {
-      succesful["oriental"] = false;
-    }
-    try {
-      await tims(page, email, firstName, lastName, postalCode, day, month, year);
-      succesful["tims"] = true;
-    } catch(e) {
-      succesful["tims"] = false;
-    }
-    try {
-      await potterybarn(page, email);
-      succesful["potterybarn"] = true;
-    } catch(e) {
-      succesful["potterybarn"] = false;
-    }
+    // try{
+    //   await oriental(page, email);
+    //   succesful["oriental"] = true;
+    // } catch(e) {
+    //   succesful["oriental"] = false;
+    // }
+    // try {
+    //   await tims(page, email, firstName, lastName, postalCode, day, month, year);
+    //   succesful["tims"] = true;
+    // } catch(e) {
+    //   succesful["tims"] = false;
+    // }
+    // try {
+    //   await potterybarn(page, email);
+    //   succesful["potterybarn"] = true;
+    // } catch(e) {
+    //   succesful["potterybarn"] = false;
+    // }
     try {
       await flowers(page, email);
       succesful["flowers"] = true;
